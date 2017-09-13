@@ -1,0 +1,8 @@
+Options -Indexes
+
+Options +FollowSymLinks
+RewriteEngine On
+RewriteRule ^([^/.]+)/?$ index.php?page=$1
+
+RewriteCond %{REQUEST_URI} !vl
+RewriteRule ^([^/.]+)/([0-9]+)/?$ index.php?page=$1&ID=$2
