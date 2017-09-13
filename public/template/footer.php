@@ -11,5 +11,6 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?php echo TEMPLATE_URL_JS; ?>bootstrap.min.js"></script>
 <script src="<?php echo TEMPLATE_URL_PLUGINS; ?>sweetalert-master/dist/sweetalert.min.js"></script>
+<script src="<?php echo TEMPLATE_URL_JS; ?>custom.js"></script>
 </body>
 </html>

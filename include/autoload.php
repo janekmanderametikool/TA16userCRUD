@@ -54,3 +54,4 @@ require_once INCLUDE_PATH . 'functions.php';
 require_once INCLUDE_PATH . 'class.User.php';
 require_once INCLUDE_PATH . 'class.Category.php';
 require_once INCLUDE_PATH . 'class.Car.php';
+require_once INCLUDE_PATH . 'class.Rel.php';

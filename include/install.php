@@ -30,3 +30,11 @@ $create_categories_table = "CREATE TABLE `veebiprogrammeerimine_janek`.`kjass_ca
   `edited_by` INT NOT NULL,
   `status` INT NOT NULL
 ) ENGINE = InnoDB;";
+
+$created_car_category_rel = "CREATE TABLE `veebiprogrammeerimine_janek`.`kjass_car_cat_rel`(
+  `ID` SERIAL,
+  `car_id` INT NOT NULL,
+  `category_id` INT NOT NULL,
+  `added` DATETIME NOT NULL,
+  `edited` DATETIME ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE = InnoDB;";

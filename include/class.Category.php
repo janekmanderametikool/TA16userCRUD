@@ -70,4 +70,14 @@ class Category extends DatabaseQuery
 
         return $this->url;
     }
+
+    public static function findMainCategories() {
+
+        $sql = "SELECT * FROM " . PX . self::$table_name
+            . " WHERE parent = 0";
+
+        $result = static::find_by_query($sql);
+
+        return !empty($result) ? $result : false;
+    }
 }

@@ -49,8 +49,6 @@ if(isset($btn)) {
         $category->edited_by = $session->user_id;
         $category->urlSlug($name);
 
-        pd($category);
-        exit();
         if($category->save()) {
             if(empty($ID)) {
                 $session->message(alert('Category added', 'success'));
