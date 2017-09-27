@@ -198,3 +198,25 @@ function url_slug($str, $options = array()) {
 
     return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
 }
+
+function t($key, $default = '', $l = '') {
+    if (!empty($l)) {
+        require_once MAIN_PATH . "languages" . DS . $l . DS . 'main.php';
+    } else {
+        global $language;
+    }
+
+    if (!isset($language[$key])) {
+        if (!empty($default)) {
+            return $default;
+        }
+
+        return 'error_translation_missing['. $key .']';
+    }
+
+    return $language[$key];
+}
+
+function getLanguage() {
+    return $_SESSION['language'];
+}

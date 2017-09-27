@@ -24,11 +24,15 @@ class Category extends DatabaseQuery
     public $edited_by;
     public $status;
 
-    public static function findCategories($ID = 0) {
+    public static function findCategories($ID = 0, $page = 0, $maxCategories = 0) {
         global $database;
 
         $sql = "SELECT * FROM " . PX . self::$table_name;
             $sql.= empty($ID) ? "" : " WHERE ID != " . $database->escape_value($ID);
+
+        if ( (!empty($page) || $page == 0) && !empty($maxCategories)) {
+            $sql.= " LIMIT " . $database->escape_value($page) . ", " . $database->escape_value($maxCategories);
+        }
 
         $result = static::find_by_query($sql);
 
@@ -75,6 +79,17 @@ class Category extends DatabaseQuery
 
         $sql = "SELECT * FROM " . PX . self::$table_name
             . " WHERE parent = 0";
+
+        $result = static::find_by_query($sql);
+
+        return !empty($result) ? $result : false;
+    }
+
+    public static function findMainCategoriesNotYourself($ID = 0) {
+        global $database;
+
+        $sql = "SELECT * FROM " . PX . self::$table_name . " WHERE parent = 0";
+        $sql.= empty($ID) ? "" : " AND ID != " . $database->escape_value($ID);
 
         $result = static::find_by_query($sql);
 

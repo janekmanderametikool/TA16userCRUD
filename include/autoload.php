@@ -39,6 +39,9 @@ defined('TEMPLATE_URL_CSS') ? null : define('TEMPLATE_URL_CSS', MAIN_URL . 'temp
 defined('TEMPLATE_URL_JS') ? null : define('TEMPLATE_URL_JS', MAIN_URL . 'template/js/');
 defined('TEMPLATE_URL_PLUGINS') ? null : define('TEMPLATE_URL_PLUGINS', MAIN_URL . 'template/plugins/');
 
+//MAX item on page
+defined('MAX_ITEMS_ON_PAGE') ? null : define('MAX_ITEMS_ON_PAGE', 10);
+
 //Static Settings
 require_once INCLUDE_PATH . 'settings.php';
 
@@ -55,3 +58,12 @@ require_once INCLUDE_PATH . 'class.User.php';
 require_once INCLUDE_PATH . 'class.Category.php';
 require_once INCLUDE_PATH . 'class.Car.php';
 require_once INCLUDE_PATH . 'class.Rel.php';
+require_once INCLUDE_PATH . 'class.Translate.php';
+
+$languages = ['en', 'et'];
+
+if (!isset($_SESSION['language'])) {
+    $_SESSION['language'] = 'en';
+}
+
+require_once MAIN_PATH . "languages" . DS . $_SESSION['language'] . DS . 'main.php';

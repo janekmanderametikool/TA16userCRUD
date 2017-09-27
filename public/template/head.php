@@ -29,3 +29,14 @@
     <![endif]-->
 </head>
 <body style="background: url('<?php echo TEMPLATE_URL ?>/images/bg3.jpg')">
+<div style="position: absolute; top: 20px; right: 20px">
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <?php echo t('head_translation_dropdown'); ?>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item change_language" href="#" data-language="en"><?php echo t('head_dropdown_english'); ?></a>
+            <a class="dropdown-item change_language" href="#" data-language="et"><?php echo t('head_dropdown_estonia'); ?></a>
+        </div>
+    </div>
+</div>

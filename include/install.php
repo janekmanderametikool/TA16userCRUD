@@ -38,3 +38,15 @@ $created_car_category_rel = "CREATE TABLE `veebiprogrammeerimine_janek`.`kjass_c
   `added` DATETIME NOT NULL,
   `edited` DATETIME ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = InnoDB;";
+
+$created_translation = "CREATE TABLE `veebiprogrammeerimine_janek`.`kjass_translations`(
+  `ID` SERIAL,
+  `table_id` INT NOT NULL,
+  `class` VARCHAR(50) NOT NULL,
+  `keyword` VARCHAR(255) NOT NULL,
+  `translation` TEXT NOT NULL,
+  `language` VARCHAR(3) NOT NULL,
+  `added` DATETIME NOT NULL,
+  `edited` DATETIME ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE = InnoDB;";
+

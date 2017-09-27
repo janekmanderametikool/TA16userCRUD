@@ -64,7 +64,9 @@ class Session
     }
 
     public function logout() {
+        $tLang = $_SESSION['language'];
         session_unset();
+        $_SESSION['language'] = $tLang;
         unset($this->user_id);
         $this->logged_in = false;
     }

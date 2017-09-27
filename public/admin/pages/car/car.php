@@ -31,6 +31,8 @@ if(empty($ID)) {
     $car = Car::find_by_ID($ID);
 }
 
+$translations = Translate::getTranslations($ID, 'Car', getLanguage());
+
 if(isset($btn)) {
     $errors = [];
     if(empty($name)){
@@ -52,7 +54,10 @@ if(isset($btn)) {
 
         $car->name = $name;
         $car->price = $price;
-        $car->info = $info;
+        if (getLanguage() == 'en') {
+            $car->info = $info;
+        }
+
         $car->status = 1;
         $car->edited_by = $session->user_id;
         $car->urlSlug($name);
@@ -60,6 +65,21 @@ if(isset($btn)) {
         if($car->save()) {
 
             $car_id = empty($ID) ? $database->get_last_id() : $ID;
+
+            if (getLanguage() != 'en') {
+                $translation = Translate::getTranslation($car_id, 'Car', 'info', getLanguage());
+                if (empty($translation)) {
+                    $translation = new Translate();
+                    $translation->table_id = $car_id;
+                    $translation->class = 'Car';
+                    $translation->keyword = 'info';
+                    $translation->language = getLanguage();
+                    $translation->added = date("Y-m-d H:i:s");
+                }
+
+                $translation->translation = $info;
+                $translation->save();
+            }
 
             Rel::deleteByCar($car_id);
             if (!empty($categories['categories']) && !empty($car_id)) : foreach ($categories['categories'] as $category_id) {
@@ -102,9 +122,9 @@ echo empty($errors) ? '' : "<ul><li>".join("</li><li>", $errors)."</li></ul>";
         >
     </div>
     <div class="form-group">
-        <label for="name">Info</label>
+        <label for="name"><?php echo t('admin_car_info'); ?><i class="fa fa-language"></i> <span class="change_language" data-language="en"><?php echo t('head_dropdown_english'); ?></span> | <span class="change_language" data-language="et"><?php echo t('head_dropdown_estonia'); ?></span></label>
         <textarea name="info" class="form-control" id="info" aria-describedby="name"
-                  placeholder="1999"><?php echo isset($car->price) ? $car->price : ''; ?></textarea>
+                  placeholder="1999"><?php echo Translate::t($car, 'info', $translations); ?></textarea>
     </div>
 
     <?php

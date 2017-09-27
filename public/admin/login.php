@@ -7,6 +7,8 @@
  */
 require_once "../../include/autoload.php";
 
+pd($language);
+
 $btn = filter_input(INPUT_POST, 'btn', FILTER_SANITIZE_STRING);
 $username = filter_input(INPUT_POST, 'username', FILTER_VALIDATE_EMAIL);
 $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
@@ -40,19 +42,19 @@ if(isset($btn)) {
 get_template('head'); ?>
 
     <div class="container">
-        <h1>Admin Login</h1>
+        <h1><?php echo t('login_header'); ?></h1>
 
         <form method="POST">
             <div class="form-group">
-                <label for="username">Email</label>
+                <label for="username"><?php echo t('login_email'); ?></label>
                 <input name="username" type="email" class="form-control"
                        id="username" aria-describedby="username" placeholder="Enter email">
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password"><?php echo t('login_password'); ?></label>
                 <input name="password" type="password" class="form-control" id="password" placeholder="Password">
             </div>
-            <button name="btn" value="login" type="submit" class="btn btn-primary">Submit</button>
+            <button name="btn" value="login" type="submit" class="btn btn-primary"><?php echo t('login_button'); ?></button>
         </form>
 
     </div>

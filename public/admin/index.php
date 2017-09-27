@@ -19,10 +19,10 @@ $page = getPage(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING));
 
 get_template('head'); ?>
 
-<div class="container">
+<div class="container" style="margin-top: 75px;">
     <div class="row">
         <div class="col-sm-8">
-            <h1>Admin Dashboard</h1>
+            <h1><?php echo t('admin_header'); ?></h1>
         </div>
         <div class="col-sm-4">
             <div class="dropdown text-right">
@@ -35,7 +35,7 @@ get_template('head'); ?>
                         <?php echo $session->username; ?>
                         <br><em class="text-muted"><?php echo $groups[$session->group]; ?></em>
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="<?php echo ADMIN_URL; ?>logout.php">
                         <i class="fa fa-power-off" aria-hidden="true"></i> Logout
                     </a>
                 </div>

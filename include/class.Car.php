@@ -52,4 +52,18 @@ class Car extends DatabaseQuery
 
         return !empty($result) ? $result : false;
     }
+
+    public static function findByIds($ids = []) {
+
+        if (empty($ids)) {
+            return false;
+        }
+
+        $sql = "SELECT * FROM " . PX . self::$table_name
+            . " WHERE ID IN(" . join(", ", $ids) . ")";
+
+        $result = static::find_by_query($sql);
+
+        return !empty($result) ? $result : false;
+    }
 }

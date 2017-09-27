@@ -36,6 +36,14 @@ if(isset($btn)) {
         $parent = 0;
     }
 
+    if (!empty($ID)) {
+        $subCategories = Category::findCategoriesByParent($ID);
+
+        if (!empty($subCategories)) {
+            $errors['parent'] = 'Category has subcategories!';
+        }
+    }
+
     if(empty($errors)) {
 
         if (empty($ID)) {
@@ -73,7 +81,7 @@ echo empty($errors) ? '' : "<ul><li>".join("</li><li>", $errors)."</li></ul>";
         >
     </div>
     <div class="form-group">
-        <?php echo form_select('Parent', 'parent', Category::findCategories($ID), $category->parent); ?>
+        <?php echo form_select('Parent', 'parent', Category::findMainCategoriesNotYourself($ID), $category->parent); ?>
     </div>
 
     <button name="btn" value="add" type="submit" class="btn btn-primary">Submit</button>
